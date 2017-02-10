@@ -82,6 +82,9 @@ void loop() {
   
   float actual_turns = (float)count/24.0;
   
+  lcd.print("       ");
+  lcd.setCursor(8, 1);
+  
   lcd.print(actual_turns, 1);
   
   
