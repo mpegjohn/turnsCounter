@@ -27,8 +27,15 @@ LiquidCrystal lcd(LCD_RS, LCD_EN, LCD_D4, LCD_D5, LCD_D6, LCD_D7);
 
 volatile unsigned long count = 0;
 
-void updateCount() { 
-  count++;
+void updateCount() {
+  static unsigned long last_interrupt_time = 0;
+  unsigned long interrupt_time = millis();
+  // Only update count if it has been longer than 10mS
+  if(interrupt_time - last_interrupt_time > 10)
+  {
+    count++;
+  }
+  last_interrupt_time = interrupt_time;
 }
 
 void setup() {
@@ -82,9 +89,9 @@ void loop() {
   
   float actual_turns = (float)count/24.0;
   
+  lcd.print("       ");
+  lcd.setCursor(8, 1);
+  
   lcd.print(actual_turns, 1);
-  
-  
-  
 }
 
