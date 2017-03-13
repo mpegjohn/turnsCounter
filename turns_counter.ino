@@ -31,7 +31,7 @@ void updateCount() {
   static unsigned long last_interrupt_time = 0;
   unsigned long interrupt_time = millis();
   // Only update count if it has been longer than 10mS
-  if(interrupt_time - last_interrupt_time > 10)
+  if(interrupt_time - last_interrupt_time > 20)
   {
     count++;
   }
@@ -86,12 +86,10 @@ void loop() {
   lastButtonState = reading;
   
   lcd.setCursor(8, 1);
-  
-  float actual_turns = (float)count/24.0;
-  
+    
   lcd.print("       ");
   lcd.setCursor(8, 1);
   
-  lcd.print(actual_turns, 1);
+  lcd.print(count);
 }
 
